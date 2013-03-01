@@ -1,0 +1,35 @@
+{
+	"dataset" : {
+		"device_os" : [ "iOS 3.2", "iOS 4.0", "iOS 4.1", "iOS 4.1.1", "iOS 5.0", "iOS 6.0", "Android 2.0", "Android 2.2" ],
+		"device_model" : ["iPhone 3G", "iPhone 4", "iPhone 4S", "iPhone 5", "iPad 1", "iPad 2", "iPad 3", "iPad Mini", "Samsung Galaxy SIII", "Nexus 7", "Nexus 4"],
+		"requested_at" : {
+			"type" : "time",
+			"start" : 1340834358,
+			"end" : 1341093558,
+			"duration-limit" : 1200
+		}
+	},
+	"relationships" : [ {
+		"keys" : ["device_os", "device_model"],
+		"device_os" : {
+			"matches" : {
+				"iOS*" : {
+					"sibling-contains" : ["iPhone", "iPad", "iPod"]
+				},
+				"Android*" : {
+					"sibling-excludes" : ["iPhone", "iPad", "iPod"]
+				}
+			}
+		},
+		"device_model" : {
+			"contains" : {
+				"values" : ["iPhone", "iPad", "iPod"],
+				"sibling-matches" : "iOS*"
+			},
+			"missing" : {
+				"values" : ["iPhone", "iPad", "iPod"],
+				"sibling-matches" : "Android*"
+			}
+		}
+	}]
+}
